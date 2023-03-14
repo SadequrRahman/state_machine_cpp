@@ -1,6 +1,6 @@
 SET(LIB_NAME StateController)
 
-SET(SRC StateMachine.cpp StateNode.cpp)
+SET(SRC StateMachine.cpp StateNode.cpp EventManager.cpp)
 
 include_directories("includes")
 
