@@ -3,11 +3,13 @@
 #include <stdint.h>
 
 
-template<typename EventParams>
+
 class BaseEvent
 {
 
 public:
-    virtual EventParams getEventParams(void) = 0;
-    virtual EventParams getEventIdentifier(void) = 0;
+    
+    virtual uint64_t getEventIdentifier(void) = 0;
+    virtual void *getEventParams(void) = 0;
 };
+ 

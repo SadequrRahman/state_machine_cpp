@@ -3,11 +3,13 @@
 template<typename EventType>
 EventManager<EventType>::EventManager()
 {
+    
 }
 
 template<typename EventType>
 EventManager<EventType>::~EventManager()
 {
+
 }
 
 template<typename EventType>

@@ -14,17 +14,13 @@ StateNode::~StateNode()
 AbstractState* StateNode::getNextState(int event)
 {
     // TO DO need to check vaild event for
-    if(event == 0)
-    {
-        state->onExecute();
-        return state;
-    }
-    else
+    if(graph.find(event)->second)
     {
         state->onExit();
         graph[event]->onEntry();
         return graph[event];
     }
+    return nullptr;
 }
 
 void StateNode::appendTransition(AbstractState* state, int event)

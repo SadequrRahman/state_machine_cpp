@@ -41,39 +41,46 @@ void StateMachine::addState(StateNode state)
     table.push_back(state);
 }
 
+void StateMachine::queueEvent(BaseEvent* event)
+{
+    eQueue.push(event);
+}
+
+
+uint32_t StateMachine::isEventAvailable(void)
+{
+    return eQueue.size();
+}
+
 void StateMachine::run(void)
 {
-    int e = 0;
-    int indx = 0;
-    int counter = 0;
-    bool isDone = false;
+    int indx(0);
     cState->onEntry();
+
     while (isRunning)
     {
-        nState = table.at(indx).getNextState(e);
-        if(nState != cState)
+        cState->onExecute();
+        if(isEventAvailable())
         {
+            BaseEvent* e = eQueue.front();
+            nState = table.at(indx).getNextState(e->getEventIdentifier());
+            if(nState != cState)
+            {
             for (size_t i = 0; table.size(); i++)
             {
                 if(table.at(i).getState() == nState)
                 {
                     indx = i;
                     cState = nState;
-                    isDone = true;
-                    e  = 0;
-                    counter = 0;
                     break;
                 }
             }
+            }
+            eQueue.pop();
         }
+        
+        
 
-        if(!isDone)
-            counter++;
-
-        if(counter == 10)
-        {
-            e = 1;
-        }
         sleep(1);
     }
     

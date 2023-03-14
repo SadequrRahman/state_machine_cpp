@@ -10,7 +10,7 @@ class EventManager
  
 public:
     EventManager();
-    ~EventManager();
+    virtual ~EventManager();
 
     void registerEvent(EventType event);
     EventType dispatchEvent(void);
