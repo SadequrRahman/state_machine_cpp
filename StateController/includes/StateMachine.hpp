@@ -6,17 +6,19 @@
 #include <EventManager.hpp>
 #include <BaseEvent.hpp>
 
-class StateMachine
+
+class StateMachine 
 {
 
 public:
-    StateMachine();
+
     StateMachine(AbstractState* state);
     ~StateMachine();
     void addState(StateNode state);
     void queueEvent(BaseEvent* event);
     uint32_t isEventAvailable(void);
     void run(void);
+    void operator()(void);
 
 private:
     /* data */

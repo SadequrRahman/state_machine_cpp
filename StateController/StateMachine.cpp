@@ -17,12 +17,6 @@ void signalHandler(int signum)
     exit(signum);  
 }
 
-StateMachine::StateMachine():
-cState(nullptr),nState(nullptr)
-{
-    signal(SIGINT, signalHandler);
-    std::cout << "creating State machine" << std::endl;
-}
 
 StateMachine::StateMachine(AbstractState *state):
 cState(state),nState(nullptr)
@@ -78,10 +72,12 @@ void StateMachine::run(void)
             }
             eQueue.pop();
         }
-        
-        
-
-        sleep(1);
+        usleep(1000 * 500);
     }
     
+}
+
+void StateMachine::operator()(void)
+{
+    run();
 }
